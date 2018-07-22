@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Book from './Book.js'
 
 class Bookshelf extends Component {
+  updateShelf = () => {
+    this.props.updateBooks()
+  }
+
   render() {
     return (
       <div className="list-books-content">
@@ -15,6 +19,7 @@ class Bookshelf extends Component {
                   <Book
                     book={book}
                     key={book.id}
+                    updateBook={this.updateShelf}
                   />
                 ))}
             </ol>
