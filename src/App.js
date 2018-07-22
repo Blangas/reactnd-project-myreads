@@ -8,8 +8,6 @@ import Book from './Book.js'
 class BooksApp extends React.Component {
   state = {
     books: [],
-    showSearchPage: false,
-    query: '',
     searchQuery: []
   }
 
@@ -35,10 +33,6 @@ class BooksApp extends React.Component {
     } else {
       this.setState({ searchQuery: []})
     }
-  }
-
-  clearQuery = () => {
-    this.setState({ query: '' })
   }
 
   render() {
