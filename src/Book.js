@@ -7,14 +7,31 @@ class Book extends Component {
     this.props.updateBook()
   }
 
+  defaultValue = () => {
+    if (this.props.book.shelf) {
+      return this.props.book.shelf
+    } else {
+      const inAList = this.props.bookList.filter(book => book.id === this.props.book.id)
+      if (inAList.length > 0) {
+        return inAList[0].shelf
+      } else {
+        return "none"
+      }
+    }
+  }
+
   render() {
     return (
       <li>
         <div className="book">
           <div className="book-top">
-            <img className="book-cover" src={this.props.book.imageLinks.thumbnail} alt="{this.props.book.title}" />
+            {this.props.book.imageLinks ? (
+              <img className="book-cover" src={this.props.book.imageLinks.thumbnail} alt="{this.props.book.title}" />
+            ) : (
+              <div>No Image</div>
+            )}
             <div className="book-shelf-changer">
-              <select defaultValue={this.props.book.shelf}
+              <select defaultValue={this.defaultValue()}
                 onChange={(e) => { this.updateBook(this.props.book, e.target.value)}}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>

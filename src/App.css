@@ -161,9 +161,9 @@ body, .app {
   cursor: pointer;
 }
 
-option:checked::after {
-  color: green;
-  content: "v"
+option:checked {
+  background-color: green;
+  color: white;
 }
 
 /* book cover */

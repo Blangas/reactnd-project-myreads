@@ -3,7 +3,6 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Bookshelf from './Bookshelf.js'
 import Book from './Book.js'
-import SearchList from './SearchList.js'
 
 class BooksApp extends React.Component {
   state = {
@@ -47,7 +46,7 @@ class BooksApp extends React.Component {
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <a className="close-search" onClick={() => this.setState({ showSearchPage: false, searchQuery: [] })}>Close</a>
               <div className="search-books-input-wrapper">
                 <input
                   type="text"
@@ -58,14 +57,19 @@ class BooksApp extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-                {this.state.searchQuery
-                  .map(book => (
-                    <Book
-                      book={book}
-                      key={book.id}
-                      updateBook={this.getBooks}
-                    />
-                  ))}
+                {this.state.searchQuery.length ? (
+                  this.state.searchQuery
+                    .map(book => (
+                      <Book
+                        book={book}
+                        bookList={this.state.books}
+                        key={book.id}
+                        updateBook={this.getBooks}
+                      />
+                    ))
+                ) : (
+                  <li>Search doesn't have any results...</li>
+                )}
               </ol>
             </div>
           </div>
